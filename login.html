@@ -1,0 +1,20 @@
+<!-- Same as before up to the script section -->
+<script>
+  function validateLogin(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === 'smssravan@gmail.com' && password === '12345678') {
+      // Save to session storage (optional)
+      sessionStorage.setItem("username", username);
+
+      // Redirect to welcome page
+      window.location.href = "welcome.html";
+    } else {
+      alert('Please enter valid credentials!');
+    }
+  }
+</script>
+
