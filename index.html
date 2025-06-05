@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Your Brand</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen font-sans">
+
+  <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-md w-full animate-fade-in">
+    <div class="text-center mb-6">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Brand Logo" class="w-16 mx-auto mb-4">
+      <h1 class="text-2xl font-bold text-gray-700">Welcome Back</h1>
+      <p class="text-sm text-gray-500">Log in to your account</p>
+    </div>
+
+    <form>
+      <div class="mb-4">
+        <label class="block text-gray-600 mb-1">Email</label>
+        <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Enter your email" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-600 mb-1">Password</label>
+        <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Enter your password" required>
+      </div>
+
+      <div class="flex items-center justify-between text-sm text-gray-600 mb-6">
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-2"> Remember me
+        </label>
+        <a href="#" class="text-indigo-500 hover:underline">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition duration-300">
+        Login
+      </button>
+    </form>
+
+    <p class="mt-6 text-center text-sm text-gray-600">Don't have an account?
+      <a href="#" class="text-indigo-500 font-medium hover:underline">Sign up</a>
+    </p>
+  </div>
+
+  <!-- Optional Animation -->
+  <script>
+    document.querySelector('.animate-fade-in').style.opacity = 0;
+    setTimeout(() => {
+      document.querySelector('.animate-fade-in').style.transition = "opacity 0.8s ease";
+      document.querySelector('.animate-fade-in').style.opacity = 1;
+    }, 200);
+  </script>
+
+</body>
+</html>
