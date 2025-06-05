@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <style>
+    body {
+      background: #e0f2fe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+    .welcome-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-box">
+    <h1>Welcome, <span id="userDisplay"></span>!</h1>
+    <p>You have successfully logged in.</p>
+  </div>
+
+  <script>
+    const user = sessionStorage.getItem("username");
+    document.getElementById("userDisplay").textContent = user ?? "User";
+  </script>
+</body>
+</html>
+
