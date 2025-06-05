@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body {
+      background: #f0f9ff;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dashboard-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1d4ed8;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-box">
+    <h2>Hello, <span id="usernameDisplay"></span>!</h2>
+    <p>You're now viewing the protected dashboard.</p>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const username = sessionStorage.getItem("username");
+    
+    if (!username) {
+      // Redirect to login if not logged in
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("usernameDisplay").textContent = username;
+    }
+
+    function logout() {
+      sessionStorage.removeItem("username");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
+
