@@ -1,30 +1,16 @@
-name: Auto Merge Feature Branches
+name: 🔁 Auto Merge Branches
 
 on:
-  push:
+  push:           # 👉 This makes it trigger on ANY branch
     branches:
-      - '**'  # Trigger on push to ANY branch
-    paths:
-      - '**'  # Run for any file change in any folder (not just HTML or script)
+      - '**'      # double asterisk = all branches
 
 jobs:
-  auto-merge:
+  merge:
     runs-on: ubuntu-latest
-
     steps:
-      - name: ⬇️ Checkout Repository
+      - name: ⬇️ Checkout Code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Important: fetch all branches!
-
-      - name: ⚙️ Set up Git
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-
-      - name: 🔑 Authenticate with GitHub using Token
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
       - name: 🚀 Run Merge Script
         run: |
