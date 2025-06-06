@@ -1,0 +1,29 @@
+name: Auto Merge Feature Branches
+
+on:
+  push:
+    branches:
+      - '**'        # Trigger on push to any branch
+    paths:
+      - '**.html'   # Optional: limit to HTML changes
+      - auto-merge.sh
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: 🚀 Run Merge Script
+        env:
+          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x auto-merge.sh
+          ./auto-merge.sh
