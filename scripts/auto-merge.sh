@@ -2,7 +2,7 @@
 set -e
 
 # Configuration
-REPO_URL="git@github.com:<your-username>/<your-repo>.git"
+REPO_URL="https://github.com/smssravan/Konnect.git"
 INTERMEDIATE_BRANCH="intermediate_branch"
 
 # Step 1: Clean up and clone
