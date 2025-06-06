@@ -1,53 +1,44 @@
 #!/bin/bash
-set -e
 
-# CONFIGURATION
 REPO_URL="https://github.com/smssravan/Konnect.git"
 CLONE_DIR="repo-clone"
-INTERMEDIATE_BRANCH="intermediate"
-GIT_NAME="Auto Merge Bot"
-GIT_EMAIL="bot@example.com"
 
-# CLEANUP AND CLONE
+# Clean up any old clone
 rm -rf "$CLONE_DIR"
-git clone "$REPO_URL" "$CLONE_DIR"
-cd "$CLONE_DIR"
 
-# SET USER
-git config user.name "$GIT_NAME"
-git config user.email "$GIT_EMAIL"
+echo "🔄 Cloning repository..."
+git clone "$REPO_URL" "$CLONE_DIR" || exit 1
+cd "$CLONE_DIR" || exit 1
 
-# START FROM MASTER
+# Checkout master and pull latest
 git checkout master
 git pull origin master
 
-# CREATE INTERMEDIATE FROM MASTER
-git checkout -b "$INTERMEDIATE_BRANCH"
+# Create or reset intermediate branch
+git checkout -B intermediate
 
-# LIST REMOTE BRANCHES EXCLUDING master/main/intermediate
-branches=$(git branch -r | grep -vE "origin/(master|main|$INTERMEDIATE_BRANCH)" | sed 's|origin/||' | uniq)
+# Get all remote branches except master/main/intermediate
+BRANCHES=$(git branch -r | grep -v 'origin/master' | grep -v 'origin/main' | grep -v 'origin/intermediate' | grep 'origin/' | sed 's/origin\///')
 
-echo "Merging these branches into $INTERMEDIATE_BRANCH:"
-echo "$branches"
-echo "--------------------------------------------"
-
-# MERGE EACH BRANCH INTO INTERMEDIATE
-for branch in $branches; do
-  echo "▶️ Merging: $branch"
-  git fetch origin "$branch:$branch"
-  git merge --no-edit "$branch" || {
-    echo "❌ Merge conflict in $branch – skipping"
-    git merge --abort
+echo "🔀 Merging branches into intermediate:"
+for branch in $BRANCHES; do
+  echo "➡️ Merging: $branch"
+  git fetch origin "$branch"
+  git merge origin/"$branch" --no-edit || {
+    echo "❌ Merge conflict with $branch — resolve manually."
+    exit 1
   }
 done
 
-# PUSH INTERMEDIATE
-git push origin "$INTERMEDIATE_BRANCH"
+# Push intermediate branch
+git push origin intermediate
 
-# MERGE INTERMEDIATE INTO MASTER
+# Merge intermediate into master
 git checkout master
-git merge --no-edit "$INTERMEDIATE_BRANCH"
+git merge intermediate --no-edit
+
+# Push master to GitHub
 git push origin master
 
-echo "✅ All branches merged into '$INTERMEDIATE_BRANCH' and pushed to 'master'"
+echo "✅ All changes merged and pushed to GitHub."
 
