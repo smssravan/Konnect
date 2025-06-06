@@ -1,0 +1,18 @@
+name: 🔁 Auto Merge Branches
+
+on:
+  push:           # 👉 This makes it trigger on ANY branch
+    branches:
+      - '**'      # double asterisk = all branches
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🚀 Run Merge Script
+        run: |
+          chmod +x auto-merge.sh
+          ./auto-merge.sh
