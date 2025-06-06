@@ -3,10 +3,9 @@ name: Auto Merge Feature Branches
 on:
   push:
     branches:
-      - '**'        # Trigger on push to any branch
+      - '**'  # Trigger on push to ANY branch
     paths:
-      - '**.html'   # Optional: limit to HTML changes
-      - auto-merge.sh
+      - '**'  # Run for any file change in any folder (not just HTML or script)
 
 jobs:
   auto-merge:
@@ -15,15 +14,19 @@ jobs:
     steps:
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Important: fetch all branches!
 
       - name: ⚙️ Set up Git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
+      - name: 🔑 Authenticate with GitHub using Token
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
       - name: 🚀 Run Merge Script
-        env:
-          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x auto-merge.sh
           ./auto-merge.sh
