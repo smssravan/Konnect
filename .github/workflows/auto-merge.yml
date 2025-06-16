@@ -15,4 +15,4 @@ jobs:
       - name: 🚀 Run Merge Script
         run: |
           chmod +x auto-merge.sh
-          ./auto-merge.sh
+           bash auto-merge.sh
