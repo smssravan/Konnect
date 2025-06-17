@@ -1,5 +1,9 @@
 #!/bin/bash
 
+git config --global user.name "Auto Merge Bot"
+git config --global user.email "smssravan091@gmail.com"
+
+
 REPO_URL="https://github.com/smssravan/Konnect.git"
 CLONE_DIR="repo-clone"
 
