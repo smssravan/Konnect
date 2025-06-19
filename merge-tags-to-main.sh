@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set your repo URL and main branch name
-REPO_URL="https://github.com/YOUR_USERNAME/YOUR_REPO.git"  # Replace with your actual repo
+REPO_URL="https://github.com/smssravan/Konnect"  # Replace with your actual repo
 MAIN_BRANCH="main"
 CLONE_DIR="repo-clone"
 
